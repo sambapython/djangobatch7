@@ -1,0 +1,62 @@
+1. create a project DataCenter, create an app "system".
+
+req:  http://127.0.0.1:8000/get_temp/  
+respone: 27.56 
+req:  http://127.0.0.1:8000/get_availablespace/  
+respone: 20PB
+req:  http://127.0.0.1:8000/get_numberofCPUS/  
+respone: 4CORES
+
+2.create a project ERP 
+	app1: sales
+	app2: pur
+	app3: stock
+	app4: accounting
+create index.html template in all apps 
+req:  http://127.0.0.1:8000/sales/index/  it should read sales app index.html
+req:  http://127.0.0.1:8000/pur/index/  it should read pur app index.html
+req:  http://127.0.0.1:8000/stock/index/  it should read stock app index.html
+req:  http://127.0.0.1:8000/accounting/index/  it should read accounting app index.html
+
+
+
+2. create a form to take the details of a person for institure course.
+3. need to show the form created above(2nd assignment) for the url: http://127.0.0.1:8000/create_person/
+4. create project called ERP
+5. Create atleast 5 different apps. Each app contains atleast two models.
+ do makemigrations and migrate to DB. out of 2  models  one model should contains your own primarykey. 
+6. Create atleast 5 different apps. Each app contains atleast two models.
+ do makemigrations and migrate to DB. out of 2  models  one model should contains your own primarykey. 
+Add foreignkey and manytomany relations among the app models. 
+And create atleast five records for each model using shell tool.
+7. Add atleast one foreignkey and one manytomanyfield in each app of the assignment6
+    insert atleast 15 records for each model. And write a code in shell to grep the details from 
+   each table of all apps
+8. develop the study space application.
+9. develop a basic html page with maximum tags in html, use inlilne, internal, external
+    style concept in this page.
+10. impliment the cocepts in the project ->login, logout, session management, login decorator
+11. handling the uploads for the project using media folder
+12. User tracking for every record in django DB. Who is creaed, when it is created, who is updated, when it is updated.
+13. write a project for document handling: i.e soft copy of library.
+
+14. Write a model which tracks the row baseed on the login user: i.e every row shoul update with the four fields.
+	1. created_by
+	2. updated_by
+	3.created_date
+	4. updated_date
+	5. deleted_by
+	Note: if the user sends the delete request. should not delte the record from data
+		base. follow one status field. incorporate this status fuctionality in entire 
+   		record processing.
+	TRY THIS: To accomplish the above job, you may write the code in views. Instead of
+		handling this features in views, try from model or use any other concept
+		in django.
+15. If you provide an authenticaion from other autentication management systems
+(google, facebook)Filter the records of the webapp based on the roles. if the role== manager. He should be
+in the position to do all operations. If he is a normal user he should be in the position to modify 
+his records only,but have an option to see all records.
+16. The chanllenge in the above assignment is you got user from other authentication 
+      management(google, facebook)(i.e SSO single sign on). Should be in the position to '
+     listout the records,but he should not have update or delete operations permissions.
+
