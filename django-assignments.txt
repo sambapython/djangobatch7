@@ -18,6 +18,9 @@ req:  http://127.0.0.1:8000/pur/index/  it should read pur app index.html
 req:  http://127.0.0.1:8000/stock/index/  it should read stock app index.html
 req:  http://127.0.0.1:8000/accounting/index/  it should read accounting app index.html
 
+3. develop the urls and templates for registration, login, product_create, vendor_create,
+	stockoperation_create. get the fields from draftdb.excel
+
 
 
 2. create a form to take the details of a person for institure course.

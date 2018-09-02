@@ -7,3 +7,14 @@ from django.shortcuts import render
 def home_view(request):
 	return render(request,"stock/home.html") 
 
+def registration_view(request):
+	print "*"*20
+	# print "method=",request.method
+	# print "get=",request.GET
+	# print "post=",request.POST
+	data = request.POST
+	print data.get("user")
+	print data.get("password")
+	print "*"*20
+	return render(request,"stock/reg.html")
+
