@@ -11,4 +11,4 @@ class WareHouse(models.Model):
 class Product(models.Model):
 	name=models.CharField(max_length=250)
 	class Meta:
-		db_table="product"
+		db_table="product1"
