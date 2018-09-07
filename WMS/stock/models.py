@@ -9,8 +9,8 @@ class BaseAbstractModel(models.Model):
 	desc=models.TextField(blank=True)
 	status = models.BooleanField(default=True)
 	create_date = models.DateTimeField(auto_now_add=True)
-	update_date = models.DateTimeField(blank=True)
-	delete_date = models.DateTimeField(blank=True)
+	update_date = models.DateTimeField(blank=True, null=True)
+	delete_date = models.DateTimeField(blank=True, null=True)
 	class Meta:
 		abstract=True
 
@@ -28,9 +28,12 @@ class UserProfile(models.Model):
 # create table productcategory(id int primarykey, name varchar(250))
 class ProductCategory(BaseAbstractModel):
 	#pk_id=models.IntegerField(primary_key=True)
-	create_user = models.ForeignKey(UserProfile, related_name ="pc_cr")
-	update_user = models.ForeignKey(UserProfile, related_name ="pc_up")
-	delete_user = models.ForeignKey(UserProfile, related_name ="pc_de")
+	create_user = models.ForeignKey(UserProfile, 
+		related_name ="pc_cr",blank=True, null=True, on_delete = models.PROTECT)
+	update_user = models.ForeignKey(UserProfile, related_name ="pc_up",
+		blank=True, null=True, on_delete = models.PROTECT)
+	delete_user = models.ForeignKey(UserProfile, related_name ="pc_de",
+		blank=True, null=True, on_delete = models.PROTECT)
 
 
 
@@ -38,11 +41,15 @@ class ProductCategory(BaseAbstractModel):
 		db_table="productcategory"
 
 class Product(BaseAbstractModel):
-	category = models.ForeignKey(ProductCategory)
+	category = models.ForeignKey(ProductCategory, 
+		on_delete = models.PROTECT)
 	charge_day = models.IntegerField()
-	create_user = models.ForeignKey(UserProfile, related_name ="p_cr")
-	update_user = models.ForeignKey(UserProfile, related_name ="p_up")
-	delete_user = models.ForeignKey(UserProfile, related_name ="p_de")
+	create_user = models.ForeignKey(UserProfile, related_name ="p_cr",
+		blank=True, null=True, on_delete = models.PROTECT)
+	update_user = models.ForeignKey(UserProfile, related_name ="p_up",
+		blank=True, null=True, on_delete = models.PROTECT)
+	delete_user = models.ForeignKey(UserProfile, related_name ="p_de",
+		blank=True, null=True,on_delete = models.PROTECT)
 	class Meta:
 		db_table="product"
 
@@ -55,10 +62,13 @@ class Product(BaseAbstractModel):
 
 class StockOperations(BaseAbstractModel):
 	products = models.ManyToManyField(Product)
-	vendor = models.ForeignKey(UserProfile)
-	create_user = models.ForeignKey(UserProfile, related_name ="so_cr")
-	update_user = models.ForeignKey(UserProfile, related_name ="so_up")
-	delete_user = models.ForeignKey(UserProfile, related_name ="so_del")
+	vendor = models.ForeignKey(UserProfile, on_delete = models.PROTECT)
+	create_user = models.ForeignKey(UserProfile, related_name ="so_cr",
+		blank=True, null=True, on_delete = models.PROTECT)
+	update_user = models.ForeignKey(UserProfile, related_name ="so_up",
+		blank=True, null=True, on_delete = models.PROTECT)
+	delete_user = models.ForeignKey(UserProfile, related_name ="so_del",
+		blank=True, null=True, on_delete = models.PROTECT)
 	class Meta:
 		db_table="stockoperation"
 
