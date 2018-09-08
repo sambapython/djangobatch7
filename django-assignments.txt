@@ -32,9 +32,20 @@ inheritace models.
 	app2: pur
 	app3: stock
 	app4: accounting
-create atleast two models for each app makenure that it is covering all the
+create atleast two models for each app makesure that it is covering all the
 relations(foreignkey,OneToOne,ManyToMany,). Maintain atleast one abstract for app. 
 and do migrations and migrate. Fill the data into tables 
 using shell. every table should contains atleast five records. Use OneToOne relation and 
 inheritace models. Maintain the user TRACK and datetime track
+
+5.create a project ERP 
+	app1: sales
+	app2: pur
+	app3: stock
+	app4: accounting
+create atleast two models for each app makesure that it is covering all the
+relations(foreignkey,OneToOne,ManyToMany,). Maintain atleast one abstract  model for app. 
+and do migrations and migrate. Fill the data into tables 
+using model forms. 
+
 
