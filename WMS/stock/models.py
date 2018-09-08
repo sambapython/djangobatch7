@@ -20,8 +20,13 @@ class UserProfile(models.Model):
 	phone = models.CharField(max_length=15)
 	role = models.CharField(choices=roles, max_length=2, default='v')
 	user = models.OneToOneField(User)
+
 	class Meta:
 		db_table="userprofile"
+
+	def __str__(self):
+		return self.user.username
+
 
 
 # Create your models here.
@@ -34,11 +39,11 @@ class ProductCategory(BaseAbstractModel):
 		blank=True, null=True, on_delete = models.PROTECT)
 	delete_user = models.ForeignKey(UserProfile, related_name ="pc_de",
 		blank=True, null=True, on_delete = models.PROTECT)
-
-
-
 	class Meta:
 		db_table="productcategory"
+		
+	def __str__(self):
+		return self.name
 
 class Product(BaseAbstractModel):
 	category = models.ForeignKey(ProductCategory, 
@@ -52,6 +57,8 @@ class Product(BaseAbstractModel):
 		blank=True, null=True,on_delete = models.PROTECT)
 	class Meta:
 		db_table="product"
+	def __str__(self):
+		return "%s--%s--%s"%(self.name,self.charge_day,self.category)
 
 # class UserProfile(User):
 # 	roles = [('v','vendor'),('m',"manager")]

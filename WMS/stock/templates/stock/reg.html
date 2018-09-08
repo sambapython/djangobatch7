@@ -30,11 +30,13 @@
 		</ul>
 	</div>
 	<div class="row">
+		<p> {{ message }}</p>
 		<hr>
 		<form method="post">
 			{% csrf_token %}
-			username: <input type="text" name="user">
-			password: <input type="password" name="password">
+			username: <input type="text" name="username"><br>
+			password: <input type="password" name="password"><br>
+			{{ regform.as_p }}
 			<input type="submit" name="" value="REGISTER">
 		</form>
 	</div>
