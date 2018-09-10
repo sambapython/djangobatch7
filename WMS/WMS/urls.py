@@ -16,14 +16,20 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from stock.views import home_view, registration_view,\
-create_stockoperation_view
+create_stockoperation_view, update_stockoperation_view,\
+delete_stockoperation_view, stockoperations_view, login_view,\
+index_view
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^login/', login_view),
+    url(r'^index/', index_view),
     url(r'^$', home_view),
     url(r'^registration/$', registration_view),
     url(r'^create_stockoperation/$', create_stockoperation_view),
-
+    url(r'^update_stockoperation/([0-9]+)/$', update_stockoperation_view),
+    url(r'^delete_stockoperation/([0-9]+)/$', delete_stockoperation_view),
+    url(r'^stockoperations/$', stockoperations_view),
     
     
 ]

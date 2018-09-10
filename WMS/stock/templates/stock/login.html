@@ -1,0 +1,11 @@
+{% extends 'stock/base.html' %}
+{% block content%}
+	<h1>LOGIN TO WMS</h1>
+	<h2>{{ message }}</h2>
+	<form method="post">
+		{% csrf_token %}
+		UserName: <input type="text" name="username"><br>
+		password: <input type="text" name="password"><br>
+		<input type="submit" name="" value="login">
+	</form>
+{% endblock %}

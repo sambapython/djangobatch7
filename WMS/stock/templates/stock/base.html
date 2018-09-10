@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% block header%}
+  <title>KHYAATHI</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  {% endblock %}
+</head>
+<body>
+	{% block menu%}
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="#">KWMS</a>
+	    </div>
+	    <ul class="nav navbar-nav">
+	      <li class="active"><a href="#">Home</a></li>
+	      <!-- <li><a href="stockoperations/">Stock Operations</a></li> -->
+	    </ul>
+	    <ul class="nav navbar-nav navbar-right">
+	      <li><a href="/registration/"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+	      <li><a href="/login/"><span class="glyphicon glyphicon-log-in"></span> Signin</a></li>
+	    </ul>
+	  </div>
+	</nav>
+	{% endblock %}
+
+<div class="container">
+	<div class="row">
+		<h3>sdfsgfds</h3>
+	</div>
+
+	{% block description%}
+	<div class="description">
+		<p>Want to store the goods in my wharehose?, then follow the below rules</p>
+		<ul>
+			<li>register with the software</li>
+			<li>send your goods to warehouse</li>
+			<li>can login to the same software and check the stock operations</li>
+			<li>If you want more information call to: 9675345629</li>
+		</ul>
+	</div>
+	{% endblock %}
+
+	<div class="row">
+		<hr>
+		{% block content%}
+		<div class="col-sm-6">
+			<a href="/registration/" class="btn btn-info" role="button">REGISTRATION</a>
+		</div>
+		<div class="col-sm-6">
+			<a href="/login/" class="btn btn-info" role="button">LOGIN</a>
+		</div>
+		{% endblock %}
+	</div>
+	<div class="footer">
+		{% block footer%}
+		<hr>
+		<h5>details of manager</h5>
+		<ul>
+			<li>phone:2345678654</li>
+			<li>email:email1@<khyaathi class="com"></khyaathi></li>
+		</ul>
+		<h6>Address of the ware house</h6>
+		<ul>
+			<li>state:Telangana, city: Hyderabad </li>
+			<li>email:ware1@khyaathi.com, phone:040-22345678</li>
+			<li>street:ameerpet</li>
+			<li>hno:1-12, pincode:500082</li>
+		</ul>
+		{% endblock %}
+
+	</div>
+</div>
+</body>
+</html>
