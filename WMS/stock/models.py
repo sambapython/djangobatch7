@@ -66,9 +66,14 @@ class Product(BaseAbstractModel):
 # 	phone = models.CharField(max_length=15)
 # 	role = models.CharField(choices=roles, max_length=2)
 
+class LineItem(BaseAbstractModel):
+	product = models.ForeignKey(Product, on_delete = models.PROTECT)
+	count = models.IntegerField()
+
 
 class StockOperations(BaseAbstractModel):
-	products = models.ManyToManyField(Product)
+	#products = models.ManyToManyField(Product)
+	types = [("i","in"),("o","out")]
 	vendor = models.ForeignKey(UserProfile, on_delete = models.PROTECT)
 	create_user = models.ForeignKey(UserProfile, related_name ="so_cr",
 		blank=True, null=True, on_delete = models.PROTECT)
@@ -76,8 +81,12 @@ class StockOperations(BaseAbstractModel):
 		blank=True, null=True, on_delete = models.PROTECT)
 	delete_user = models.ForeignKey(UserProfile, related_name ="so_del",
 		blank=True, null=True, on_delete = models.PROTECT)
+	lineitems = models.ManyToManyField(LineItem)
+	operation_type = models.CharField(max_length=3,choices=types)
 	class Meta:
 		db_table="stockoperation"
+
+
 
 
 
