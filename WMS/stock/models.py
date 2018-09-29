@@ -33,6 +33,7 @@ class UserProfile(models.Model):
 # create table productcategory(id int primarykey, name varchar(250))
 class ProductCategory(BaseAbstractModel):
 	#pk_id=models.IntegerField(primary_key=True)
+	unique_name = models.CharField(max_length=250, unique=True)
 	create_user = models.ForeignKey(UserProfile, 
 		related_name ="pc_cr",blank=True, null=True, on_delete = models.PROTECT)
 	update_user = models.ForeignKey(UserProfile, related_name ="pc_up",

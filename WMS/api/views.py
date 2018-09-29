@@ -7,7 +7,8 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from stock.models import ProductCategory
+from stock.models import ProductCategory, StockOperations, LineItem,\
+UserProfile, Product
 from rest_framework import status
 
 class ProductCategoryAPIView(APIView):
@@ -105,3 +106,37 @@ def api_product_view(request):
 		# take the id and delete the record
 	return HttpResponse(json.dumps("HELLO FIREFOX"))
 '''
+class StockoperationsAPIView(APIView):
+	def post(self, request):
+		try:
+			data = request.data
+			try:
+				vendor = UserProfile.objects.get(id=data.get("vendor"))
+			except Exception as err:
+				return Response({"erros":"Vendor not found"},
+					status=status.HTTP_400_BAD_REQUEST)
+			so = StockOperations(name=data.get("name"),
+				desc=data.get("desc"),
+				operation_type=data.get("operation_type"),
+				vendor=vendor)
+			so.save()
+			for item in data.get("items"):
+				try:
+					product = Product.objects.get(id=item.get("product"))
+				except Exception as err:
+					return Response({"erros":"product not found"},
+						status=status.HTTP_400_BAD_REQUEST)
+				count = item.get("count")
+				litem = LineItem(product=product, count=count)
+				litem.save()
+				so.lineitems.add(litem)
+			return Response({"message":"stock operation successfully",
+				 "errors":{},
+				 "item":{"name":so.name,"desc":so.desc,"id":so.id}
+				},
+				status = status.HTTP_201_CREATED)
+		except Exception as err:
+			return Response({"erros":"%s"%err},
+				status=status.HTTP_400_BAD_REQUEST)
+
+

@@ -1,0 +1,7 @@
+# global authentication
+# view wise authentication.
+
+#scenarios
+1. Authenticaqtion for All
+2. Authentication for fewviews (100 views, provide auth for 10 views)
+3. Authentication for moreviews (100 views, provide auth for 90 views)
