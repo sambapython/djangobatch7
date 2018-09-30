@@ -5,12 +5,16 @@ from django.shortcuts import render, redirect
 from stock.forms import UserProfileForm, UserProfileFormAll,\
 StockOperationForm
 from django.contrib.auth.models import User
-from stock.models import StockOperations
+from stock.models import StockOperations, ProductCategory
 from django.contrib.auth import authenticate
 
 # Create your views here.
-def index_view(request):
-	return render(request,"stock/index.html")
+# def productcategories_view(request):
+# 	data = ProductCategory.objects.all()
+# 	return render(request, "stock/productcategories.html",
+# 		"data":data)
+# def index_view(request):
+# 	return render(request,"stock/index.html")
 def login_view(request):
 	message = ""
 	if request.method=="POST":

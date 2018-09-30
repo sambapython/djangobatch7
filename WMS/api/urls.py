@@ -15,10 +15,6 @@ Including another URLconf
 """
 from django.conf.urls import url,include
 from django.contrib import admin
-from stock.views import home_view, registration_view,\
-create_stockoperation_view, update_stockoperation_view,\
-delete_stockoperation_view, stockoperations_view, login_view,\
-index_view
 from api.views import ProductCategoryAPIView, StockoperationsAPIView
 from api.views_serializer import ProductCategoryAPIViewSer,\
 StockoperationsAPIViewSer

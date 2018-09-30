@@ -38,3 +38,12 @@ and do migrations and migrate. Fill the data into tables
 using shell. every table should contains atleast five records. Use OneToOne relation and 
 inheritace models. Maintain the user TRACK and datetime track
 
+5. develop three products menus
+	product_raw(develop CRUD without using django forms, generic views)
+	product_form(develop CRUD by using django forms wihtout using generic views)
+	product_generic(develop CRUD by using generic views)
+6. develop rest services(post, put, delete, get) for prodcut without using rest_framework.serializers
+
+7. develop rest services(post, put, delete, get) for prodcut by using rest_framework.serializers
+
+

@@ -1,0 +1,8 @@
+{% extends "stock/index.html"%}
+{% block content %}
+	<h1>Deleting product category</h1>
+	<form method="post">
+		{% csrf_token %}
+		<input type="submit" name="" value="Confirm DELETE">
+	</form>
+{% endblock %}
