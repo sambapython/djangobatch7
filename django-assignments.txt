@@ -46,4 +46,6 @@ inheritace models. Maintain the user TRACK and datetime track
 
 7. develop rest services(post, put, delete, get) for prodcut by using rest_framework.serializers
 
+8. while deleting the product category its deleting the record from database. but requirement is that it should not delte record from database it should only change the status. In  the list view of product category it should show the product categories which has status true.
+
 
