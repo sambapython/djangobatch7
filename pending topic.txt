@@ -1,0 +1,12 @@
+1) handling images, file uploads
+2) user tracking
+3) DRF with authentication, username,pasword, and token.
+4)middle ware, signals
+5) logging
+6) miliple databases for single project
+7) cache management
+8) ajax call, error handling
+9) testing in 
+10) formset
+11) deployment with apache or nginx
+12) channels?

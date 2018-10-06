@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
+{% extends "stock/index.html"%}
+{% block content %}
 	<a href="/create_stockoperation/"> CREAT STOCK OPERATION</a><br>
 	<table border="1">
 		<thead>
@@ -33,5 +29,4 @@
 			{% endfor %}
 		</tbody>
 	</table>
-</body>
-</html>
+{% endblock %}

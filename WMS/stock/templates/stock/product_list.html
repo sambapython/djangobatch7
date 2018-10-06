@@ -1,24 +1,27 @@
 {% extends "stock/index.html" %}
 {% block content%}
-	<a href="/pc_create/">CREATE PRODUCT CATEGORY</a>
+	<a href="/product_create/">CREATE PRODUCT</a>
+	<h4>{{ msg }}</h4>
 	<form>
-		Pagenumber:<input type="text" name="page" value="{{page_obj.number}}">
+		Pagenumber:<input type="text" name="page" value="{{page_num}}">
 		<input type="submit" name="" value="Get Page records">
 	</form>
-	<h1>Product categories</h1>
+	<h1>Products</h1>
 	<div class="table-responsive">
 		<table class="table" id="datatable">
 			<thead>
 			<tr>
-				<th>Unique Name</th><th>Name</th><th>DESC</th><th>Operations</th>
+				<th>Name</th><th>DESC</th><th>Category</th>
+				<th>Day charge</th><th>Operations</th>
 			</tr>
 			</thead>
 			<tbody>
 				{% for object in object_list %}
 				<tr>
-					<td>{{ object.unique_name }}</td>
 					<td>{{ object.name }}</td>
 					<td>{{ object.desc }}</td>
+					<td>{{ object.category }}</td>
+					<td>{{ object.charge_day }}</td>
 					<td>
 						<a href="/pc_update/{{object.id}}/">UPDATE</a>
 						<a href="/pc_delete/{{object.id}}/">DELETE</a>

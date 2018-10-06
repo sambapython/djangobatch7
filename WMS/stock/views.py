@@ -5,8 +5,39 @@ from django.shortcuts import render, redirect
 from stock.forms import UserProfileForm, UserProfileFormAll,\
 StockOperationForm
 from django.contrib.auth.models import User
-from stock.models import StockOperations, ProductCategory
-from django.contrib.auth import authenticate
+from stock.models import StockOperations, ProductCategory,\
+Product
+from django.contrib.auth import authenticate, login,logout
+from django.contrib.auth.decorators import login_required
+from django.conf import settings
+from django.core.paginator import Paginator
+
+records_per_page=settings.RECORDS_PER_PAGE
+
+def products_view(request):
+	msg=""
+	products = Product.objects.all()
+	p = Paginator(products, records_per_page)
+	page_num = request.GET.get("page", 1)
+	try:
+		required_page=p.page(page_num)
+	except Exception as err:
+		page_num=1
+		msg=err.message
+		required_page=p.page(page_num)
+	msg = msg+ " Showing page:%s records"%page_num
+	return render(request, "stock/product_list.html",
+		{"object_list": required_page.object_list,
+		"msg":msg,"page_num":page_num})
+def checklogin(view_fun):
+	def inner(request,*args, **kwargs):
+		user_id = request.session.get('_auth_user_id')
+		if not user_id:
+			return redirect("/")
+		else:
+			return view_fun(request,*args, **kwargs)
+	return inner
+
 
 # Create your views here.
 # def productcategories_view(request):
@@ -15,7 +46,13 @@ from django.contrib.auth import authenticate
 # 		"data":data)
 # def index_view(request):
 # 	return render(request,"stock/index.html")
+def logout_view(request):
+	#request.session=None
+	logout(request)
+	return redirect("/")
+
 def login_view(request):
+	next_url = request.GET.get("next","")
 	message = ""
 	if request.method=="POST":
 		username = request.POST.get("username")
@@ -23,7 +60,12 @@ def login_view(request):
 		user = authenticate(username=username,
 			password=password)
 		if user:
+			#request.session
+			# request.session["user"]=user.username
+			login(request, user)
 			message="successfully logedin"
+			if next_url:
+				return redirect(next_url)
 			return redirect("/index/")
 		else:
 			message = "wrong credentials"
@@ -41,9 +83,16 @@ def home_view(request):
 # 	print data.get("password")
 # 	print "*"*20
 # 	return render(request,"stock/reg.html"
+@login_required
 def stockoperations_view(request):
-	data = StockOperations.objects.all()
-	return render(request,"stock/stockoperations.html",{"data":data})
+	user_id = request.session.get('_auth_user_id')
+	if not user_id:
+		return redirect("/")
+	else:
+		data = StockOperations.objects.all()
+		return render(request,"stock/stockoperations.html",{"data":data})
+
+@login_required
 def delete_stockoperation_view(request,pk):
 	message=""
 	if request.method=="POST":
@@ -52,6 +101,8 @@ def delete_stockoperation_view(request,pk):
 		message="Record deleted successfully"
 		return redirect('/stockoperations/')
 	return render(request, "stock/so_del.html",{"message":message})
+
+@login_required
 def update_stockoperation_view(request, pk):
 	data = StockOperations.objects.get(id=pk)
 	message=""
@@ -67,6 +118,7 @@ def update_stockoperation_view(request, pk):
 
 	return render(request,"stock/so.html",
 		{"form":form,"message": message})
+@login_required
 def create_stockoperation_view(request):
 	form = StockOperationForm()
 	message=""
