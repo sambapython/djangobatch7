@@ -8,5 +8,7 @@
 8) ajax call, error handling
 9) testing in 
 10) formset
-11) deployment with apache or nginx
+11) deployment with apache or nginx(wsgi)
 12) channels?
+13) how to execute management commands in setup script.
+14) Custom management commands.
