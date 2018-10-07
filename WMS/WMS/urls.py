@@ -18,17 +18,27 @@ from django.contrib import admin
 from stock.views import home_view, registration_view,\
 create_stockoperation_view, update_stockoperation_view,\
 delete_stockoperation_view, stockoperations_view, login_view,\
-logout_view, products_view
+logout_view, products_view, product_create_view
 
 from django.views.generic import TemplateView, ListView,\
 CreateView, UpdateView, DeleteView
-from stock.models import ProductCategory
+from stock.models import ProductCategory, Product
 from django.contrib.auth.decorators import login_required
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     url(r'^api/', include('api.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^products/', products_view),
+    #url(r'^product_create/', product_create_view),
+    url(r'^product_create/', 
+        CreateView.as_view(
+            model=Product,
+            fields=['name','desc','category','charge_day','image1',
+            "image2"],
+            success_url = "/products/",
+            )),
     url(r'^login/', login_view),
     url(r'^signout/', logout_view),
     url(r'^index/',
@@ -52,19 +62,17 @@ urlpatterns = [
         login_required(CreateView.as_view(
         model = ProductCategory,
         success_url = "/productcategories/",
-        fields=("unique_name","name","desc"),
+        fields=("unique_name","name","desc","image"),
         ))),
     url(r'^pc_update/(?P<pk>[0-9]+)/$', 
         login_required(UpdateView.as_view(
         model = ProductCategory,
         success_url = "/productcategories/",
-        fields=("unique_name","name","desc"),
+        fields=("unique_name","name","desc","image"),
         ))),
     url(r'^pc_delete/(?P<pk>[0-9]+)/$', 
         login_required(DeleteView.as_view(
         model = ProductCategory,
         success_url = "/productcategories/",
         ))),
-    
-    
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	{% load static %}
 	{% block header%}
   <title>KHYAATHI</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
+  <link rel="stylesheet" href="{% static 'stock/css/bootstrap.min.css'%}">
+  <script src="{% static 'stock/js/jquery.min.js' %}"></script>
+  <script src="{% static 'stock/js/bootstrap.min.js' %}"></script>
+  <script type="text/javascript" src="{%static 'stock/js/jquery.dataTables.min.js' %}"></script>
+  <script type="text/javascript" src="{%static 'stock/js/dataTables.bootstrap.min.js' %}"></script>
+  
+  <link rel="stylesheet" type="text/css" href="{% static 'stock/css/dataTables.bootstrap.min.css' %}">
   {% endblock %}
 </head>
 <body>
@@ -19,10 +20,11 @@
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 	  <div class="container-fluid">
 	    <div class="navbar-header">
-	      <a class="navbar-brand" href="#">KWMS</a>
+	      <img src="{% static 'stock/img/logo.jpg'%}" alt="NO LOGO" width="50" height="50"/>
+	      <a class="navbar-brand" href="/">KWMS</a>
 	    </div>
 	    <ul class="nav navbar-nav">
-	      <li class="active"><a href="#">Home</a></li>
+	      <li class="active"><a href="/">Home</a></li>
 	      <!-- <li><a href="stockoperations/">Stock Operations</a></li> -->
 	    </ul>
 	    <ul class="nav navbar-nav navbar-right">

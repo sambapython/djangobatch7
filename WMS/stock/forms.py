@@ -1,5 +1,6 @@
 from django import forms
 from stock.models import UserProfile, StockOperations, Product
+
 class UserProfileForm(forms.ModelForm):
 	class Meta:
 		model = UserProfile
@@ -13,7 +14,7 @@ class UserProfileFormAll(forms.ModelForm):
 class ProductForm(forms.ModelForm):
 	class Meta:
 		model = Product
-		fields = "__all__"
+		fields = ['name','desc','category','charge_day','image1']
 
 class StockOperationForm(forms.ModelForm):
 	class Meta:

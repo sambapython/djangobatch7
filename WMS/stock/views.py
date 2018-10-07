@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+import os
 
 from django.shortcuts import render, redirect
 from stock.forms import UserProfileForm, UserProfileFormAll,\
-StockOperationForm
+StockOperationForm, ProductForm
 from django.contrib.auth.models import User
 from stock.models import StockOperations, ProductCategory,\
 Product
@@ -11,8 +12,38 @@ from django.contrib.auth import authenticate, login,logout
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.core.paginator import Paginator
+import time
+from django.conf import settings
+media_path = settings.MEDIA_ROOT
 
 records_per_page=settings.RECORDS_PER_PAGE
+
+def product_create_view(request):
+	
+	form = ProductForm()
+	if request.method=="POST":
+		# model form view code
+		p = ProductForm(data=request.POST,
+		 files=request.FILES)
+		p.save()
+		return  redirect("/products/")
+		#BASIC VIEW CODE
+		# data=request.POST
+		# f1 = request.FILES.get("image1")
+		# image_name = str(time.time())+f1.name
+		# f=open(os.path.join(media_path,image_name),"wb")
+		# for chunk in f1.chunks():
+		# 	f.write(chunk)
+		# f.close()
+		# category=ProductCategory.objects.get(pk=data.get("category"))
+		# p = Product(name=data.get("name"),
+		# 	desc=data.get("desc"),
+		# 	charge_day=data.get("charge_day"),
+		# 	category=category,
+		# 	image1=image_name)
+		# p.save()
+	return render(request, "stock/product_form.html",
+		{"form":form})
 
 def products_view(request):
 	msg=""

@@ -40,6 +40,7 @@ class ProductCategory(BaseAbstractModel):
 		blank=True, null=True, on_delete = models.PROTECT)
 	delete_user = models.ForeignKey(UserProfile, related_name ="pc_de",
 		blank=True, null=True, on_delete = models.PROTECT)
+	image = models.FileField(blank=True)
 	class Meta:
 		db_table="productcategory"
 		
@@ -58,6 +59,8 @@ class Product(BaseAbstractModel):
 		blank=True, null=True,on_delete = models.PROTECT)
 	class Meta:
 		db_table="product"
+	image1 = models.FileField(blank=True)
+	image2 = models.ImageField(blank=True)
 	def __str__(self):
 		return "%s--%s--%s"%(self.name,self.charge_day,self.category)
 
