@@ -4,6 +4,13 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 
+class Tracker(models.Model):
+	hostname = models.CharField(max_length=250)
+	request_url = models.CharField(max_length=1000)
+	response_statu_code=models.IntegerField()
+	user = models.ForeignKey(User, blank=True)
+
+
 class BaseAbstractModel(models.Model):
 	name=models.CharField(max_length=250)
 	desc=models.TextField(blank=True)

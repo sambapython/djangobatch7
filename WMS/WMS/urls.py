@@ -39,6 +39,13 @@ urlpatterns = [
             "image2"],
             success_url = "/products/",
             )),
+     url(r'^product_update/(?P<pk>[0-9]+)/$', 
+        UpdateView.as_view(
+            model=Product,
+            fields=['name','desc','category','charge_day','image1',
+            "image2"],
+            success_url = "/products/",
+            )),
     url(r'^login/', login_view),
     url(r'^signout/', logout_view),
     url(r'^index/',
