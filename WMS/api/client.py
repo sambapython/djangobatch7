@@ -48,8 +48,13 @@ resp = requests.post("http://127.0.0.1:8000/api/stockoperationsser/",
 print resp
 print resp.json()
 
-'''
+
 resp = requests.get("http://127.0.0.1:8000/api/stockoperationsser/")
 print resp
 print resp.json()
+'''
+resp = requests.post("http://127.0.0.1:8000/api/productcategory/",
+	data={"name":"pc1","desc":"this is created post call",
+	"unique_name":"pc1"})
+print resp
 

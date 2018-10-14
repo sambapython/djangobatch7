@@ -8,7 +8,7 @@ class Tracker(models.Model):
 	hostname = models.CharField(max_length=250)
 	request_url = models.CharField(max_length=1000)
 	response_statu_code=models.IntegerField()
-	user = models.ForeignKey(User, blank=True)
+	user = models.ForeignKey(User, blank=True, null=True)
 
 
 class BaseAbstractModel(models.Model):
