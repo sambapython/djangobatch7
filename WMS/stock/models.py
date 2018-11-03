@@ -97,6 +97,11 @@ class StockOperations(BaseAbstractModel):
 	class Meta:
 		db_table="stockoperation"
 
+class mirror(models.Model):
+	db_name="mirror"
+	name=models.CharField(max_length=250)
+
+
 
 
 

@@ -1,3 +1,4 @@
+import logging
 from rest_framework.views import APIView
 from serializers import ProductCategorySerializer,\
 StockOperationSerializer, LineItemSerializer,\
@@ -5,6 +6,10 @@ StockOperationGetSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from stock.models import StockOperations
+from rest_framework import permissions, authentication
+from rest_framework.decorators import authentication_classes,\
+permission_classes
+logger = logging.getLogger(__name__)
 class StockoperationsAPIViewSer(APIView):
 	def get(self, request):
 		data = StockOperations.objects.all()
@@ -52,12 +57,18 @@ class StockoperationsAPIViewSer(APIView):
 				status = status.HTTP_400_BAD_REQUEST
 				) 
 
-
+@authentication_classes([])
+@permission_classes([])
 class ProductCategoryAPIViewSer(APIView):
+	#permission_classes = (permissions.IsAuthenticated,)
+	#authentication_classes = (authentication.TokenAuthentication,)
 	def post(self, request):
+		logger.info("product category creation started")
 		serializer = ProductCategorySerializer(data=request.data)
 		if serializer.is_valid():
+			logger.info("validation successful")
 			serializer.save()
+			logger.info("product category created successful")
 			return Response(
 			{"message":"product category created successfully",
 			 "errors":{},
@@ -68,6 +79,7 @@ class ProductCategoryAPIViewSer(APIView):
 			)
 		else:
 			errors = serializer._errors
+			logger.error("validation failed errors: %s"%errors)
 			return Response(
 				{"message":"product category created not created",
 				 "errors":errors,

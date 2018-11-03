@@ -18,7 +18,7 @@ from django.contrib import admin
 from stock.views import home_view, registration_view,\
 create_stockoperation_view, update_stockoperation_view,\
 delete_stockoperation_view, stockoperations_view, login_view,\
-logout_view, products_view, product_create_view
+logout_view, products_view, product_create_view, formsets_view
 
 from django.views.generic import TemplateView, ListView,\
 CreateView, UpdateView, DeleteView
@@ -60,6 +60,7 @@ urlpatterns = [
     url(r'^update_stockoperation/([0-9]+)/$', update_stockoperation_view),
     url(r'^delete_stockoperation/([0-9]+)/$', delete_stockoperation_view),
     url(r'^stockoperations/$', stockoperations_view),
+    url(r'^formsets/$', formsets_view),
     url(r'^productcategories/$', 
         login_required(ListView.as_view(
         model=ProductCategory,

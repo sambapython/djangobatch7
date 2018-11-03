@@ -10,12 +10,16 @@ from rest_framework.views import APIView
 from stock.models import ProductCategory, StockOperations, LineItem,\
 UserProfile, Product
 from rest_framework import status
+from rest_framework import permissions
+
 
 class ProductCategoryAPIView(APIView):
+	
 	def post(self, request):
 		data = request.data
 		#pc = ProductCategory(**data)
 		name= data.get("name")
+		unique_name=data.get("unique_name")
 		if not name.isalnum():
 			return Response(
 				{"message":"product category created not created",
@@ -25,7 +29,7 @@ class ProductCategoryAPIView(APIView):
 				status = status.HTTP_400_BAD_REQUEST
 				)
 		pc = ProductCategory(name=data.get("name"),
-			desc=data.get("desc"))
+			desc=data.get("desc"),unique_name=unique_name)
 		pc.save()
 		#import pdb; pdb.set_trace()
 		return Response(

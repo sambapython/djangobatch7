@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'stock',
     'warehouse',
     'rest_framework',
+    'rest_framework.authtoken',
     'api',
 ]
 
@@ -51,7 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'stock.middle.TrackerMiddleWare',
+    #'stock.middle.TrackerMiddleWare',
 ]
 
 ROOT_URLCONF = 'WMS.urls'
@@ -82,7 +83,12 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    },
+    'mirror': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db_mirror.sqlite3'),
     }
+
 }
 
 
@@ -131,5 +137,47 @@ RECORDS_PER_PAGE=100
 MEDIA_ROOT= os.path.join(BASE_DIR,"media")
 MEDIA_URL="/media/"
 
+REST_FRAMEWORK = {
 
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        #'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    )
+}
 
+LOGGING ={
+            'version': 1,
+            'disable_existing_loggers':False,
+            'formatters':{
+                'simple':{
+                    'format':"%(asctime)s->%(levelname)s->%(message)s->%(name)s"
+                },
+
+            },
+            'handlers': {
+                'console': {
+                    'class': 'logging.StreamHandler',
+                    #'class': 'logging.FileHandler',
+                    #'filename':'log.txt',
+                    'formatter': "simple",
+                    },
+                'file': {
+                    'class': 'logging.FileHandler',
+                    'filename':'log.txt',
+                    'formatter': "simple",
+                    },
+                },
+            'loggers': {
+                'api': {
+                'handlers': ['console'],
+
+                'level': "DEBUG"},
+                'stock': {
+                'handlers': ['file'],
+
+                'level': "DEBUG"},
+                },
+}

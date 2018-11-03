@@ -1,0 +1,8 @@
+2018-10-14 09:38:34,361->INFO->Login started->stock.views
+2018-10-14 09:38:40,535->INFO->Login started->stock.views
+2018-10-14 09:38:40,535->DEBUG->username: user3->stock.views
+2018-10-14 09:38:40,578->INFO->login successful->stock.views
+2018-10-14 09:39:11,141->INFO->Login started->stock.views
+2018-10-14 09:39:13,385->INFO->Login started->stock.views
+2018-10-14 09:39:13,385->DEBUG->username: sdfsd->stock.views
+2018-10-14 09:39:13,433->ERROR->wrong credentials given->stock.views

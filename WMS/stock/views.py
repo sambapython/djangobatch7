@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 import os
+import logging
 
 from django.shortcuts import render, redirect
 from stock.forms import UserProfileForm, UserProfileFormAll,\
@@ -14,9 +15,18 @@ from django.conf import settings
 from django.core.paginator import Paginator
 import time
 from django.conf import settings
+from django.forms import formset_factory
 media_path = settings.MEDIA_ROOT
 
 records_per_page=settings.RECORDS_PER_PAGE
+
+logger = logging.getLogger(__name__)
+def formsets_view(request):
+	productFormSet= formset_factory(ProductForm, extra=3)
+	forms = productFormSet()
+	return render(request,"product_formset.html",
+		{"forms":forms}) 
+	
 
 def product_create_view(request):
 	
@@ -83,14 +93,17 @@ def logout_view(request):
 	return redirect("/")
 
 def login_view(request):
+	logger.info("Login started")
 	next_url = request.GET.get("next","")
 	message = ""
 	if request.method=="POST":
 		username = request.POST.get("username")
 		password = request.POST.get("password")
+		logger.debug("username: %s"%username)
 		user = authenticate(username=username,
 			password=password)
 		if user:
+			logger.info("login successful")
 			#request.session
 			# request.session["user"]=user.username
 			login(request, user)
@@ -99,6 +112,7 @@ def login_view(request):
 				return redirect(next_url)
 			return redirect("/index/")
 		else:
+			logger.error("wrong credentials given")
 			message = "wrong credentials"
 	return render(request,"stock/login.html",{"message":message})
 def home_view(request):

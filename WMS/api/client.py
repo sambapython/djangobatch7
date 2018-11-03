@@ -53,8 +53,30 @@ resp = requests.get("http://127.0.0.1:8000/api/stockoperationsser/")
 print resp
 print resp.json()
 '''
-resp = requests.post("http://127.0.0.1:8000/api/productcategory/",
-	data={"name":"pc1","desc":"this is created post call",
-	"unique_name":"pc1"})
-print resp
+'''
+resp = requests.post("http://127.0.0.1:8000/api/productcategoryser/",
+	data={"name":"windows","desc":"this is created post call",
+		"unique_name":"windows"},
+	auth=("api_user","api_user")
+	)
+print resp.reason
+
+resp = requests.get("http://127.0.0.1:8000/api/productcategory/",
+	auth=("api_user","api_user")
+	)
+print resp.json()
+
+'''
+header={"Authorization":"Token 9d7b3e65046e7c910402d3a815e3c9c7baf32926"}
+resp = requests.post("http://127.0.0.1:8000/api/productcategoryser/",
+	data={"name":"windows8","desc":"this is created post call",
+		"unique_name":"windows8"},
+	#headers=header,
+	)
+print resp.reason
+
+resp = requests.get("http://127.0.0.1:8000/api/productcategory/",
+	#headers=header,
+	)
+print resp.json()
 
